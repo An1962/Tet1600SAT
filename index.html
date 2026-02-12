@@ -104,8 +104,8 @@
 
         .passage-text {
             font-family: 'Crimson Text', serif;
-            line-height: 1.6;
-            font-size: 1.1rem;
+            line-height: 1.5;
+            font-size: 1.05rem;
         }
 
         /* Flashcard Animation */
@@ -136,11 +136,8 @@
             transform: translateY(0);
         }
         
-        /* Chống highlight text khi vuốt trên điện thoại */
         #vocab-container {
-            touch-action: pan-y;
-            user-select: none;
-            -webkit-user-select: none;
+            touch-action: pan-y; /* Đảm bảo vẫn cuộn dọc được bình thường */
         }
     </style>
 </head>
@@ -181,7 +178,6 @@
                 
                 <!-- Text Content -->
                 <div class="flex-1 text-center md:text-left flex flex-col h-full justify-center">
-                    <!-- Sửa font lỗi & Nội dung mới -->
                     <p class="text-slate-700 text-[16px] mb-6 leading-relaxed font-brand font-medium">
                         Thầy <b class="text-[#004488] font-bold">Đức An</b> cùng đội ngũ chuyên gia <b class="bg-[#FFD700] text-[#004488] px-2 py-0.5 rounded shadow-sm inline-block transform -translate-y-0.5">1600 SAT</b> chân thành chúc quý phụ huynh và các em học sinh một năm mới Sức khỏe, Hạnh phúc và đạt được những cột mốc điểm số mong ước.
                     </p>
@@ -232,7 +228,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <main class="flex-grow container mx-auto px-4 py-6 md:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         <!-- LEFT COLUMN: Hall of Fame & Quotes -->
         <aside class="lg:col-span-4 space-y-6 order-2 lg:order-1">
@@ -403,16 +399,16 @@
         <!-- RIGHT COLUMN: Interactive Flashcards -->
         <section class="lg:col-span-8 order-1 lg:order-2">
             <!-- Header của Flashcard -->
-            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-3">
                 <div>
                     <h3 class="font-brand font-bold text-[#004488] uppercase text-2xl border-l-4 border-[#FFD700] pl-3 leading-none">
                         Bộ Flashcard Khai Bút
                     </h3>
-                    <p class="text-sm text-slate-500 italic mt-2 pl-4"><i class="fas fa-book-open text-[#004488] mr-1"></i> Format SAT Reading (14/02 - 23/02)</p>
+                    <p class="text-sm text-slate-500 italic mt-1 pl-4"><i class="fas fa-book-open text-[#004488] mr-1"></i> Format SAT Reading (14/02 - 23/02)</p>
                 </div>
                 
                 <!-- Navigation Controls -->
-                <div class="flex items-center justify-center gap-3 bg-white p-2 rounded-2xl card-shadow border border-slate-100 w-full md:w-auto shrink-0">
+                <div class="flex items-center justify-center gap-3 bg-white p-1.5 rounded-2xl card-shadow border border-slate-100 w-full md:w-auto shrink-0">
                     <button id="btn-prev" onclick="changeDay(-1)" class="bg-slate-50 text-[#004488] border border-slate-200 px-4 py-2 rounded-xl hover:bg-blue-50 transition disabled:opacity-40 disabled:cursor-not-allowed font-bold text-sm flex items-center gap-1 active:scale-95">
                         <i class="fas fa-chevron-left"></i> Trước
                     </button>
@@ -424,27 +420,26 @@
             </div>
 
             <!-- Single Card Container with fade effect & swipe support -->
-            <div id="vocab-container" class="fade-transition fade-in min-h-[500px]">
+            <div id="vocab-container" class="fade-transition fade-in min-h-[400px]">
                 <!-- Javascript will inject the single active card here -->
             </div>
 
-            <!-- NÂNG CẤP: Banner AI Luyện Từ Vựng SAT -->
-            <div class="mt-8 animate-pulse-soft">
+            <!-- Banner AI Luyện Từ Vựng SAT -->
+            <div class="mt-6 animate-pulse-soft">
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-1 shadow-lg border border-blue-100 relative overflow-hidden">
-                    <!-- Ánh sáng trang trí -->
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white rounded-full opacity-40 blur-2xl transform translate-x-1/2 -translate-y-1/2"></div>
                     
-                    <div class="bg-white/60 backdrop-blur-sm rounded-[22px] p-6 flex flex-col sm:flex-row items-center justify-between gap-6 border border-white">
+                    <div class="bg-white/60 backdrop-blur-sm rounded-[22px] p-5 flex flex-col sm:flex-row items-center justify-between gap-5 border border-white">
                         <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                            <div class="bg-gradient-to-br from-[#004488] to-indigo-600 w-14 h-14 rounded-2xl flex items-center justify-center text-[#FFD700] text-3xl shadow-lg shrink-0">
+                            <div class="bg-gradient-to-br from-[#004488] to-indigo-600 w-12 h-12 rounded-2xl flex items-center justify-center text-[#FFD700] text-2xl shadow-lg shrink-0">
                                 <i class="fas fa-robot"></i>
                             </div>
                             <div>
-                                <h4 class="font-brand font-bold text-[#004488] text-xl leading-tight mb-1">Trợ lý AI Luyện Từ Vựng</h4>
+                                <h4 class="font-brand font-bold text-[#004488] text-lg leading-tight mb-1">Trợ lý AI Luyện Từ Vựng</h4>
                                 <p class="text-sm text-slate-600">Trải nghiệm phương pháp học chủ động (Active Recall) với bộ 300+ từ vựng Core SAT 2026.</p>
                             </div>
                         </div>
-                        <a href="https://gemini.google.com/share/e3d6b641f07a" target="_blank" class="shrink-0 bg-gradient-to-b from-[#FFD700] to-[#f5c300] text-[#004488] font-bold py-3 px-6 rounded-2xl font-brand text-sm flex items-center gap-2 hover:scale-105 hover:shadow-xl transition-all w-full sm:w-auto justify-center border-b-4 border-[#c79e00]">
+                        <a href="https://gemini.google.com/share/e3d6b641f07a" target="_blank" class="shrink-0 bg-gradient-to-b from-[#FFD700] to-[#f5c300] text-[#004488] font-bold py-2.5 px-5 rounded-2xl font-brand text-sm flex items-center gap-2 hover:scale-105 hover:shadow-xl transition-all w-full sm:w-auto justify-center border-b-4 border-[#c79e00]">
                             <span>Học thử ngay</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -452,16 +447,16 @@
             </div>
 
             <!-- Footer CTA -->
-            <div id="register" class="mt-8 bg-white rounded-3xl p-8 card-shadow text-center border-t-4 border-[#004488]">
-                <h3 class="font-brand font-bold text-2xl text-[#004488] mb-2 uppercase">Năm 2026 Bứt Phá?</h3>
-                <p class="text-slate-600 mb-6 italic">Nhận lộ trình cá nhân hóa trực tiếp từ Thầy Đức An.</p>
+            <div id="register" class="mt-6 bg-white rounded-3xl p-6 card-shadow text-center border-t-4 border-[#004488]">
+                <h3 class="font-brand font-bold text-xl text-[#004488] mb-1 uppercase">Năm 2026 Bứt Phá?</h3>
+                <p class="text-sm text-slate-600 mb-4 italic">Nhận lộ trình cá nhân hóa trực tiếp từ Thầy Đức An.</p>
                 
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="https://www.facebook.com/nghiemducan.10/" target="_blank" class="bg-[#004488] text-white font-bold py-3 px-8 rounded-2xl btn-3d font-brand w-full sm:w-auto hover:bg-[#003366] text-center flex justify-center items-center">
-                        <i class="fab fa-facebook-messenger mr-2 text-xl"></i> Nhắn tin Thầy An
+                <div class="flex flex-col sm:flex-row justify-center gap-3">
+                    <a href="https://www.facebook.com/nghiemducan.10/" target="_blank" class="bg-[#004488] text-white font-bold py-2.5 px-6 rounded-2xl btn-3d font-brand w-full sm:w-auto hover:bg-[#003366] text-center flex justify-center items-center text-sm">
+                        <i class="fab fa-facebook-messenger mr-2 text-lg"></i> Nhắn tin Thầy An
                     </a>
-                    <a href="tel:0812358277" class="bg-blue-50 text-[#004488] font-bold py-3 px-8 rounded-2xl btn-3d font-brand w-full sm:w-auto hover:bg-blue-100 border border-blue-200 text-center flex justify-center items-center">
-                        <i class="fas fa-phone-alt mr-2 text-xl"></i> Hotline: 0812358277
+                    <a href="tel:0812358277" class="bg-blue-50 text-[#004488] font-bold py-2.5 px-6 rounded-2xl btn-3d font-brand w-full sm:w-auto hover:bg-blue-100 border border-blue-200 text-center flex justify-center items-center text-sm">
+                        <i class="fas fa-phone-alt mr-2 text-lg"></i> Hotline: 0812358277
                     </a>
                 </div>
             </div>
@@ -470,11 +465,11 @@
 
     <!-- Floating Action Buttons -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <a href="https://www.facebook.com/nghiemducan.10/" target="_blank" class="shake-element bg-blue-600 text-white w-14 h-14 rounded-full shadow-xl hover:bg-blue-700 transition flex justify-center items-center hover:scale-110">
-            <i class="fab fa-facebook-messenger text-2xl"></i>
+        <a href="https://www.facebook.com/nghiemducan.10/" target="_blank" class="shake-element bg-blue-600 text-white w-12 h-12 rounded-full shadow-xl hover:bg-blue-700 transition flex justify-center items-center hover:scale-110">
+            <i class="fab fa-facebook-messenger text-xl"></i>
         </a>
-        <a href="tel:0812358277" class="bg-[#004488] text-white w-14 h-14 rounded-full shadow-xl hover:bg-[#003366] transition border-2 border-[#FFD700] flex justify-center items-center hover:scale-110">
-            <i class="fas fa-phone text-xl"></i>
+        <a href="tel:0812358277" class="bg-[#004488] text-white w-12 h-12 rounded-full shadow-xl hover:bg-[#003366] transition border-2 border-[#FFD700] flex justify-center items-center hover:scale-110">
+            <i class="fas fa-phone text-lg"></i>
         </a>
     </div>
 
@@ -754,7 +749,9 @@
         
         // Variables for swipe gesture
         let touchstartX = 0;
+        let touchstartY = 0;
         let touchendX = 0;
+        let touchendY = 0;
 
         function initFlashcards() {
             // Lấy ngày hiện tại
@@ -781,26 +778,33 @@
         function setupSwipe() {
             container.addEventListener('touchstart', e => {
                 touchstartX = e.changedTouches[0].screenX;
+                touchstartY = e.changedTouches[0].screenY;
             }, {passive: true});
 
             container.addEventListener('touchend', e => {
                 touchendX = e.changedTouches[0].screenX;
+                touchendY = e.changedTouches[0].screenY;
                 handleSwipeGesture();
             }, {passive: true});
         }
         
         function handleSwipeGesture() {
-            const swipeThreshold = 50; // Quãng đường vuốt tối thiểu
-            if (touchendX < touchstartX - swipeThreshold) {
-                // Vuốt sang trái -> Sang thẻ tiếp theo
-                if(currentIndex < vocabList.length - 1) {
-                    changeDay(1);
+            const swipeThresholdX = 50; // Quãng đường vuốt ngang tối thiểu
+            const swipeThresholdY = 60; // Ngưỡng dọc để tránh nhận diện nhầm khi người dùng cuộn trang lên/xuống
+            
+            // Nếu người dùng cuộn dọc quá nhiều, sẽ bỏ qua nhận diện vuốt ngang
+            if (Math.abs(touchendY - touchstartY) <= swipeThresholdY) {
+                if (touchendX < touchstartX - swipeThresholdX) {
+                    // Vuốt sang trái -> Sang thẻ tiếp theo
+                    if(currentIndex < vocabList.length - 1) {
+                        changeDay(1);
+                    }
                 }
-            }
-            if (touchendX > touchstartX + swipeThreshold) {
-                // Vuốt sang phải -> Quay lại thẻ trước
-                if(currentIndex > 0) {
-                    changeDay(-1);
+                if (touchendX > touchstartX + swipeThresholdX) {
+                    // Vuốt sang phải -> Quay lại thẻ trước
+                    if(currentIndex > 0) {
+                        changeDay(-1);
+                    }
                 }
             }
         }
@@ -813,111 +817,111 @@
             document.getElementById('btn-prev').disabled = (index === 0);
             document.getElementById('btn-next').disabled = (index === vocabList.length - 1);
 
-            // Tạo các options HTML
+            // Tạo các options HTML (Thu gọn padding và text)
             let optionsHtml = '';
             item.options.forEach((opt, optIndex) => {
                 optionsHtml += `
                     <button onclick="checkAnswer(this, ${optIndex === item.correct})" 
-                        class="w-full text-left px-5 py-4 rounded-xl border-2 border-slate-100 hover:border-blue-200 hover:bg-blue-50 transition-all mb-3 font-medium text-slate-700 flex justify-between items-center group/btn text-base shadow-sm">
+                        class="w-full text-left px-4 py-2.5 rounded-xl border-2 border-slate-100 hover:border-blue-200 hover:bg-blue-50 transition-all mb-2 font-medium text-slate-700 flex justify-between items-center group/btn text-sm shadow-sm">
                         <span class="flex-1">${["A", "B", "C", "D"][optIndex]}) ${opt}</span>
                         <span class="opacity-0 group-hover/btn:opacity-100 transition-opacity text-[#004488]"><i class="fas fa-check-circle"></i></span>
                     </button>
                 `;
             });
 
-            // HTML của Card
+            // HTML của Card (Giảm khoảng cách mb, p, py)
             const cardHtml = `
-                <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-100 relative overflow-hidden group">
+                <div class="bg-white rounded-3xl p-4 md:p-6 card-shadow border border-slate-100 relative overflow-hidden group">
                     <!-- Decorative Circle -->
                     <div class="absolute -right-8 -top-8 w-32 h-32 bg-blue-50/50 rounded-full z-0"></div>
 
                     <!-- Header: Date & Theme -->
-                    <div class="relative z-10 flex flex-wrap justify-between items-start mb-6 border-b border-slate-100 pb-4">
+                    <div class="relative z-10 flex flex-wrap justify-between items-start mb-4 border-b border-slate-100 pb-3">
                         <div>
-                            <span class="inline-block bg-[#004488] text-white text-xs font-bold px-3 py-1.5 rounded-lg mb-1 font-brand uppercase tracking-wider shadow-sm">Ngày ${index + 1}: ${item.date}</span>
-                            <span class="ml-2 text-[#d4b100] font-bold text-sm uppercase"><i class="fas fa-calendar-alt mr-1"></i> ${item.lunarDate}</span>
-                            <h4 class="text-slate-500 italic text-base mt-1 text-[#004488]/80 font-medium">${item.theme}</h4>
+                            <span class="inline-block bg-[#004488] text-white text-[11px] font-bold px-3 py-1 rounded-lg mb-1 font-brand uppercase tracking-wider shadow-sm">Ngày ${index + 1}: ${item.date}</span>
+                            <span class="ml-2 text-[#d4b100] font-bold text-xs uppercase"><i class="fas fa-calendar-alt mr-1"></i> ${item.lunarDate}</span>
+                            <h4 class="text-slate-500 italic text-sm mt-1 text-[#004488]/80 font-medium">${item.theme}</h4>
                         </div>
                     </div>
 
                     <!-- Main Word Display -->
-                    <div class="relative z-10 text-center py-6 bg-slate-50/50 rounded-2xl mb-6 border border-slate-50">
-                        <h2 class="font-brand font-extrabold text-5xl md:text-6xl text-[#004488] mb-2 tracking-wide drop-shadow-sm">${item.word}</h2>
-                        <div class="flex items-center justify-center gap-3 text-slate-500 font-serif italic text-lg">
+                    <div class="relative z-10 text-center py-4 bg-slate-50/50 rounded-2xl mb-4 border border-slate-50">
+                        <h2 class="font-brand font-extrabold text-4xl md:text-5xl text-[#004488] mb-1 tracking-wide drop-shadow-sm">${item.word}</h2>
+                        <div class="flex items-center justify-center gap-3 text-slate-500 font-serif italic text-base">
                             <span>${item.pronunciation}</span>
                             <button onclick="speakWord('${item.word}')" class="text-[#004488] hover:text-[#d4b100] transition-colors hover:scale-110 active:scale-95" title="Nghe phát âm chuẩn Mỹ">
-                                <i class="fas fa-volume-up text-xl"></i>
+                                <i class="fas fa-volume-up text-lg"></i>
                             </button>
-                            <span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span>
-                            <span class="font-bold bg-white text-[#004488] px-3 py-0.5 rounded-lg text-sm not-italic border border-slate-200 shadow-sm">${item.type}</span>
+                            <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+                            <span class="font-bold bg-white text-[#004488] px-2 py-0.5 rounded text-xs not-italic border border-slate-200 shadow-sm">${item.type}</span>
                         </div>
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="relative z-10 grid grid-cols-2 gap-4 mb-8">
-                        <button onclick="toggleSection('meaning-box')" class="bg-blue-50 text-[#004488] font-bold py-3 rounded-xl hover:bg-blue-100 transition-colors text-sm border border-blue-100 flex justify-center items-center shadow-sm active:scale-95">
-                            <i class="fas fa-lightbulb mr-2 text-[#FFD700] text-lg"></i> Lật Nghĩa & Lời Chúc
+                    <div class="relative z-10 grid grid-cols-2 gap-3 mb-4">
+                        <button onclick="toggleSection('meaning-box')" class="bg-blue-50 text-[#004488] font-bold py-2 rounded-xl hover:bg-blue-100 transition-colors text-sm border border-blue-100 flex justify-center items-center shadow-sm active:scale-95">
+                            <i class="fas fa-lightbulb mr-2 text-[#FFD700]"></i> Nghĩa & Lời Chúc
                         </button>
-                        <button onclick="toggleSection('text-box')" class="bg-slate-50 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-100 transition-colors text-sm border border-slate-200 flex justify-center items-center shadow-sm active:scale-95">
-                            <i class="fas fa-book-reader mr-2 text-[#004488] text-lg"></i> Đọc Văn Bản SAT
+                        <button onclick="toggleSection('text-box')" class="bg-slate-50 text-slate-700 font-bold py-2 rounded-xl hover:bg-slate-100 transition-colors text-sm border border-slate-200 flex justify-center items-center shadow-sm active:scale-95">
+                            <i class="fas fa-book-reader mr-2 text-[#004488]"></i> Đọc Đoạn Văn
                         </button>
                     </div>
 
                     <!-- Hidden Section: Meaning -->
-                    <div id="meaning-box" class="hidden mb-6 bg-yellow-50/80 p-6 rounded-2xl border border-yellow-200 relative shadow-inner">
-                        <div class="absolute top-4 right-4 text-yellow-400 opacity-20"><i class="fas fa-star text-4xl"></i></div>
-                        <p class="font-bold text-[#004488] mb-2 text-lg flex items-center gap-2"><i class="fas fa-spell-check text-[#d4b100]"></i> Nghĩa của từ:</p>
-                        <p class="mb-4 text-slate-800 text-lg border-b border-yellow-200/50 pb-4">${item.meaning}</p>
-                        <p class="font-bold text-[#d4b100] mb-2 flex items-center gap-2"><i class="fas fa-gift"></i> Thông điệp năm mới:</p>
-                        <p class="italic text-slate-700 text-base leading-relaxed bg-white/50 p-3 rounded-lg border border-yellow-100/50">"${item.newYearMeaning}"</p>
+                    <div id="meaning-box" class="hidden mb-4 bg-yellow-50/80 p-4 rounded-2xl border border-yellow-200 relative shadow-inner">
+                        <div class="absolute top-4 right-4 text-yellow-400 opacity-20"><i class="fas fa-star text-3xl"></i></div>
+                        <p class="font-bold text-[#004488] mb-1 text-base flex items-center gap-2"><i class="fas fa-spell-check text-[#d4b100]"></i> Nghĩa của từ:</p>
+                        <p class="mb-3 text-slate-800 text-base border-b border-yellow-200/50 pb-3">${item.meaning}</p>
+                        <p class="font-bold text-[#d4b100] mb-1 flex items-center gap-2"><i class="fas fa-gift text-sm"></i> Thông điệp năm mới:</p>
+                        <p class="italic text-slate-700 text-sm leading-relaxed bg-white/50 p-2 rounded-lg border border-yellow-100/50">"${item.newYearMeaning}"</p>
                     </div>
 
                     <!-- Hidden Section: Passage & Quiz -->
                     <div id="text-box" class="hidden">
                         <!-- Passage Flip Card Container -->
-                        <div class="relative w-full mb-8 perspective-1000">
+                        <div class="relative w-full mb-4 perspective-1000">
                             <!-- MẶT TRƯỚC: Tiếng Anh -->
-                            <div id="passage-front" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 relative shadow-sm">
-                                <div class="absolute top-0 right-0 bg-[#004488] text-white text-[10px] font-bold px-3 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-wider">
+                            <div id="passage-front" class="bg-slate-50 p-4 md:p-5 rounded-2xl border border-slate-200 relative shadow-sm">
+                                <div class="absolute top-0 right-0 bg-[#004488] text-white text-[9px] font-bold px-2 py-1 rounded-bl-xl rounded-tr-2xl uppercase tracking-wider">
                                     ${item.textType}
                                 </div>
-                                <p class="passage-text text-slate-800 text-justify mb-6 mt-2">
+                                <p class="passage-text text-slate-800 text-justify mb-3 mt-1">
                                     ${item.passage}
                                 </p>
-                                <button onclick="flipPassage()" class="w-full text-center text-sm font-bold text-[#004488] bg-blue-100/50 py-3 rounded-xl hover:bg-blue-100 transition-colors border border-blue-200/50 active:scale-95">
-                                    <i class="fas fa-sync-alt mr-2"></i> Lật xem Dịch & Giải thích chi tiết
+                                <button onclick="flipPassage()" class="w-full text-center text-xs font-bold text-[#004488] bg-blue-100/50 py-2 rounded-xl hover:bg-blue-100 transition-colors border border-blue-200/50 active:scale-95">
+                                    <i class="fas fa-sync-alt mr-1"></i> Lật xem Dịch & Giải thích chi tiết
                                 </button>
                             </div>
                             
                             <!-- MẶT SAU: Dịch & Giải thích -->
-                            <div id="passage-back" class="hidden bg-[#004488]/5 p-6 rounded-2xl border border-[#004488]/20 relative shadow-sm">
-                                <div class="absolute top-0 right-0 bg-[#FFD700] text-[#004488] text-[10px] font-bold px-3 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-wider">
+                            <div id="passage-back" class="hidden bg-[#004488]/5 p-4 md:p-5 rounded-2xl border border-[#004488]/20 relative shadow-sm">
+                                <div class="absolute top-0 right-0 bg-[#FFD700] text-[#004488] text-[9px] font-bold px-2 py-1 rounded-bl-xl rounded-tr-2xl uppercase tracking-wider">
                                     Giải nghĩa
                                 </div>
-                                <div class="mt-2">
-                                    <p class="text-base text-slate-700 mb-4 pb-4 border-b border-blue-200/50 leading-relaxed text-justify">
-                                        <b class="flex items-center gap-2 mb-1"><i class="fas fa-language text-[#004488]"></i> Bản dịch:</b> ${item.passageTranslate}
+                                <div class="mt-1">
+                                    <p class="text-sm text-slate-700 mb-3 pb-3 border-b border-blue-200/50 leading-relaxed text-justify">
+                                        <b class="flex items-center gap-1 mb-1"><i class="fas fa-language text-[#004488]"></i> Bản dịch:</b> ${item.passageTranslate}
                                     </p>
-                                    <p class="text-base text-[#004488] font-medium leading-relaxed text-justify">
-                                        <b class="flex items-center gap-2 mb-1"><i class="fas fa-search"></i> Phân tích logic:</b> ${item.passageExplain}
+                                    <p class="text-sm text-[#004488] font-medium leading-relaxed text-justify">
+                                        <b class="flex items-center gap-1 mb-1"><i class="fas fa-search"></i> Phân tích logic:</b> ${item.passageExplain}
                                     </p>
                                 </div>
-                                <button onclick="flipPassage()" class="w-full text-center text-sm font-bold text-white bg-[#004488] py-3 rounded-xl hover:bg-[#003366] transition-colors mt-6 shadow-md active:scale-95">
-                                    <i class="fas fa-undo mr-2"></i> Trở về văn bản tiếng Anh
+                                <button onclick="flipPassage()" class="w-full text-center text-xs font-bold text-white bg-[#004488] py-2 rounded-xl hover:bg-[#003366] transition-colors mt-4 shadow-md active:scale-95">
+                                    <i class="fas fa-undo mr-1"></i> Trở về văn bản tiếng Anh
                                 </button>
                             </div>
                         </div>
 
                         <!-- Quiz -->
-                        <div class="mt-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                            <p class="font-brand text-base font-bold text-[#004488] mb-4 flex items-start gap-2">
-                                <i class="fas fa-question-circle mt-1 text-[#FFD700] text-lg"></i> 
+                        <div class="mt-4 bg-white p-4 md:p-5 rounded-2xl border border-slate-100 shadow-sm">
+                            <p class="font-brand text-sm font-bold text-[#004488] mb-2 flex items-start gap-2">
+                                <i class="fas fa-question-circle mt-0.5 text-[#FFD700] text-base"></i> 
                                 <span>${item.question}</span>
                             </p>
-                            <div class="space-y-3">
+                            <div class="space-y-2">
                                 ${optionsHtml}
                             </div>
-                            <div id="quiz-result" class="hidden mt-4 text-center font-bold p-3 rounded-xl text-base transition-all"></div>
+                            <div id="quiz-result" class="hidden mt-3 text-center font-bold p-2 rounded-xl text-sm transition-all"></div>
                         </div>
                     </div>
                 </div>
@@ -988,8 +992,8 @@
                 
                 btn.classList.remove('opacity-40', 'wrong-answer', 'opacity-50');
                 btn.classList.add('correct-answer', 'ring-2', 'ring-green-400', 'ring-offset-2');
-                resultDiv.innerHTML = "<i class='fas fa-check-circle mr-1 text-xl'></i> Xuất sắc! Bạn đã nắm bắt đúng logic SAT!";
-                resultDiv.className = "mt-4 text-center font-bold p-3 rounded-xl text-base bg-green-50 border border-green-200 text-green-700 animate-bounce shadow-sm";
+                resultDiv.innerHTML = "<i class='fas fa-check-circle mr-1 text-lg'></i> Xuất sắc! Bạn đã nắm bắt đúng logic SAT!";
+                resultDiv.className = "mt-3 text-center font-bold p-2.5 rounded-xl text-sm bg-green-50 border border-green-200 text-green-700 animate-bounce shadow-sm";
                 
                 // Kích hoạt hiệu ứng pháo hoa (Confetti)
                 customConfetti({
@@ -1006,8 +1010,8 @@
                 btn.classList.add('cursor-not-allowed', 'opacity-50', 'wrong-answer');
                 btn.classList.remove('hover:border-blue-200', 'hover:bg-blue-50');
                 
-                resultDiv.innerHTML = "<i class='fas fa-times-circle mr-1 text-xl'></i> Chưa đúng. Hãy thử lại hoặc lật phần <b>Giải nghĩa</b> để phân tích lỗi nhé!";
-                resultDiv.className = "mt-4 text-center font-bold p-3 rounded-xl text-base bg-red-50 border border-red-200 text-red-700 shadow-sm";
+                resultDiv.innerHTML = "<i class='fas fa-times-circle mr-1 text-lg'></i> Chưa đúng. Hãy thử lại hoặc lật phần <b>Giải nghĩa</b> nhé!";
+                resultDiv.className = "mt-3 text-center font-bold p-2.5 rounded-xl text-sm bg-red-50 border border-red-200 text-red-700 shadow-sm";
             }
             resultDiv.classList.remove('hidden');
         }

@@ -146,6 +146,62 @@
     <!-- Canvas tĩnh để Confetti hoạt động ổn định (tránh lỗi blob/Worker) -->
     <canvas id="confetti-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-[9999]"></canvas>
 
+    <!-- HELP MODAL (HƯỚNG DẪN SỬ DỤNG) -->
+    <div id="help-modal" class="fixed inset-0 z-[105] bg-[#001122]/60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-3xl w-full max-w-lg relative overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 ease-out border border-slate-100" id="help-modal-content">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-[#003366] to-[#004488] p-5 text-center relative border-b-[3px] border-[#FFD700]">
+                <button onclick="closeHelpModal()" class="absolute top-4 right-4 text-white/60 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 z-20">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+                <h3 class="font-brand font-bold text-xl text-[#FFD700] uppercase tracking-wider flex items-center justify-center gap-2">
+                    <i class="fas fa-magic"></i> Hướng dẫn sử dụng
+                </h3>
+            </div>
+            <!-- Body -->
+            <div class="p-6 text-slate-700 space-y-5 max-h-[70vh] overflow-y-auto">
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-blue-50 text-[#004488] flex items-center justify-center shrink-0 text-lg border border-blue-100"><i class="fas fa-mobile-alt"></i></div>
+                    <div>
+                        <h4 class="font-bold text-[#004488] mb-1 text-[15px]">1. Lướt thẻ thả ga</h4>
+                        <p class="text-sm leading-relaxed">Trang web tự động mở bài học đúng ngày Tết hiện tại. <b>Vuốt màn hình sang Trái/Phải</b> (hoặc bấm Trước/Tiếp) để chuyển bài học mỗi ngày.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-blue-50 text-[#004488] flex items-center justify-center shrink-0 text-lg border border-blue-100"><i class="fas fa-volume-up"></i></div>
+                    <div>
+                        <h4 class="font-bold text-[#004488] mb-1 text-[15px]">2. Luyện Nghe & Nhận Lời Chúc</h4>
+                        <p class="text-sm leading-relaxed">Nhấn vào biểu tượng cái loa để nghe phát âm chuẩn. Bấm nút <b>Nghĩa & Lời Chúc</b> để xem thông điệp may mắn đầu xuân.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-blue-50 text-[#004488] flex items-center justify-center shrink-0 text-lg border border-blue-100"><i class="fas fa-book-reader"></i></div>
+                    <div>
+                        <h4 class="font-bold text-[#004488] mb-1 text-[15px]">3. Đọc hiểu SAT Thực chiến</h4>
+                        <p class="text-sm leading-relaxed">Bấm <b>Đọc Đoạn Văn</b> để thử sức. Nếu gặp từ khó, hãy bấm nút lật thẻ để xem phần Dịch & Giải thích chi tiết logic SAT.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-blue-50 text-[#004488] flex items-center justify-center shrink-0 text-lg border border-blue-100"><i class="fas fa-fire"></i></div>
+                    <div>
+                        <h4 class="font-bold text-[#004488] mb-1 text-[15px]">4. Trắc nghiệm săn Pháo hoa</h4>
+                        <p class="text-sm leading-relaxed">Chọn A, B, C, D. Nếu sai, em hoàn toàn có thể chọn lại. Nếu đúng, sẽ có pháo hoa chúc mừng tưng bừng!</p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-xl p-4 flex gap-3 items-center mt-2 shadow-inner">
+                    <i class="fas fa-gift text-[#d4b100] text-3xl animate-bounce"></i>
+                    <p class="text-xs text-slate-700 leading-relaxed font-medium"><b>Bật mí:</b> Thử ấn vào Tên các anh chị Thủ khoa hoặc Bìa sách để khám phá món quà đặc biệt nhé!</p>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="p-4 bg-slate-50 border-t border-slate-100 text-center">
+                <button onclick="closeHelpModal()" class="bg-[#004488] text-white font-bold py-3 px-10 rounded-xl font-brand shadow-md hover:bg-[#003366] transition-all active:scale-95 text-sm hover:shadow-lg">
+                    Đã hiểu! Bắt đầu học thôi <i class="fas fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- POP-UP NĂM MỚI -->
     <div id="ny-modal" class="fixed inset-0 z-[100] bg-[#001122]/80 backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-500 opacity-0 pointer-events-none">
         <div class="bg-white rounded-3xl w-full max-w-2xl relative overflow-hidden shadow-2xl transform scale-95 transition-transform duration-500 ease-out" id="ny-modal-content">
@@ -401,10 +457,15 @@
             <!-- Header của Flashcard -->
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-3">
                 <div>
-                    <h3 class="font-brand font-bold text-[#004488] uppercase text-2xl border-l-4 border-[#FFD700] pl-3 leading-none">
-                        Bộ Flashcard Khai Bút
-                    </h3>
-                    <p class="text-sm text-slate-500 italic mt-1 pl-4"><i class="fas fa-book-open text-[#004488] mr-1"></i> Format SAT Reading (14/02 - 23/02)</p>
+                    <div class="flex items-center gap-3">
+                        <h3 class="font-brand font-bold text-[#004488] uppercase text-2xl border-l-4 border-[#FFD700] pl-3 leading-none">
+                            Bộ Flashcard Khai Bút
+                        </h3>
+                        <button onclick="showHelpModal()" class="bg-blue-50 text-[#004488] hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-lg text-xs font-bold transition-all shadow-sm flex items-center gap-1 active:scale-95 hover:shadow">
+                            <i class="fas fa-question-circle text-[#FFD700]"></i> Hướng dẫn
+                        </button>
+                    </div>
+                    <p class="text-sm text-slate-500 italic mt-2 pl-4"><i class="fas fa-book-open text-[#004488] mr-1"></i> Format SAT Reading (14/02 - 23/02)</p>
                 </div>
                 
                 <!-- Navigation Controls -->
@@ -516,6 +577,23 @@
         function closeModal() {
             const modal = document.getElementById('ny-modal');
             const content = document.getElementById('ny-modal-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+        
+        // Help Modal Logic
+        function showHelpModal() {
+            const modal = document.getElementById('help-modal');
+            const content = document.getElementById('help-modal-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function closeHelpModal() {
+            const modal = document.getElementById('help-modal');
+            const content = document.getElementById('help-modal-content');
             modal.classList.add('opacity-0', 'pointer-events-none');
             content.classList.remove('scale-100');
             content.classList.add('scale-95');

@@ -135,6 +135,13 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Chống highlight text khi vuốt trên điện thoại */
+        #vocab-container {
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
@@ -416,7 +423,7 @@
                 </div>
             </div>
 
-            <!-- Single Card Container with fade effect -->
+            <!-- Single Card Container with fade effect & swipe support -->
             <div id="vocab-container" class="fade-transition fade-in min-h-[500px]">
                 <!-- Javascript will inject the single active card here -->
             </div>
@@ -478,6 +485,19 @@
             resize: true,
             useWorker: false // Tắt worker để tránh lỗi bảo mật/blob trong iframe
         });
+
+        // Hàm phát âm TTS
+        function speakWord(word) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Dừng câu đọc trước đó nếu đang đọc
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US'; // Chuẩn giọng Mỹ
+                utterance.rate = 0.85;    // Đọc chậm hơn một chút để rõ âm
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Trình duyệt của bạn không hỗ trợ tính năng đọc. Vui lòng thử trên Chrome hoặc Safari.");
+            }
+        }
 
         // Modal Logic
         function showModal() {
@@ -731,6 +751,10 @@
 
         let currentIndex = 0;
         const container = document.getElementById('vocab-container');
+        
+        // Variables for swipe gesture
+        let touchstartX = 0;
+        let touchendX = 0;
 
         function initFlashcards() {
             // Lấy ngày hiện tại
@@ -749,6 +773,36 @@
             }
             
             renderCard(currentIndex);
+            
+            // Thiết lập sự kiện vuốt (Swipe)
+            setupSwipe();
+        }
+        
+        function setupSwipe() {
+            container.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            container.addEventListener('touchend', e => {
+                touchendX = e.changedTouches[0].screenX;
+                handleSwipeGesture();
+            }, {passive: true});
+        }
+        
+        function handleSwipeGesture() {
+            const swipeThreshold = 50; // Quãng đường vuốt tối thiểu
+            if (touchendX < touchstartX - swipeThreshold) {
+                // Vuốt sang trái -> Sang thẻ tiếp theo
+                if(currentIndex < vocabList.length - 1) {
+                    changeDay(1);
+                }
+            }
+            if (touchendX > touchstartX + swipeThreshold) {
+                // Vuốt sang phải -> Quay lại thẻ trước
+                if(currentIndex > 0) {
+                    changeDay(-1);
+                }
+            }
         }
 
         function renderCard(index) {
@@ -791,6 +845,9 @@
                         <h2 class="font-brand font-extrabold text-5xl md:text-6xl text-[#004488] mb-2 tracking-wide drop-shadow-sm">${item.word}</h2>
                         <div class="flex items-center justify-center gap-3 text-slate-500 font-serif italic text-lg">
                             <span>${item.pronunciation}</span>
+                            <button onclick="speakWord('${item.word}')" class="text-[#004488] hover:text-[#d4b100] transition-colors hover:scale-110 active:scale-95" title="Nghe phát âm chuẩn Mỹ">
+                                <i class="fas fa-volume-up text-xl"></i>
+                            </button>
                             <span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span>
                             <span class="font-bold bg-white text-[#004488] px-3 py-0.5 rounded-lg text-sm not-italic border border-slate-200 shadow-sm">${item.type}</span>
                         </div>
@@ -939,7 +996,8 @@
                     particleCount: 150,
                     spread: 80,
                     origin: { y: 0.6 },
-                    colors: ['#FFD700', '#004488', '#ffffff', '#22c55e']
+                    colors: ['#FFD700', '#004488', '#ffffff', '#22c55e'],
+                    zIndex: 90
                 });
                 
             } else {

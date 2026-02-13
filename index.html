@@ -204,37 +204,38 @@
 
     <!-- POP-UP NĂM MỚI -->
     <div id="ny-modal" class="fixed inset-0 z-[100] bg-[#001122]/80 backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-500 opacity-0 pointer-events-none">
-        <div class="bg-white rounded-3xl w-full max-w-2xl relative overflow-hidden shadow-2xl transform scale-95 transition-transform duration-500 ease-out" id="ny-modal-content">
+        <!-- Thêm max-h-[90vh] và flex flex-col để chia bố cục dọc, đảm bảo không tràn màn hình -->
+        <div class="bg-white rounded-3xl w-full max-w-2xl relative shadow-2xl transform scale-95 transition-transform duration-500 ease-out flex flex-col max-h-[90vh] overflow-hidden" id="ny-modal-content">
             
-            <!-- Decorative Header (Giao diện Tối giản, Sang trọng) -->
-            <div class="bg-[#002244] p-8 text-center relative overflow-hidden border-b-[3px] border-[#FFD700]">
+            <!-- Decorative Header (Giao diện Tối giản, Sang trọng) - Thêm shrink-0 để không bị co lại -->
+            <div class="bg-[#002244] p-6 md:p-8 text-center relative overflow-hidden border-b-[3px] border-[#FFD700] shrink-0">
                 <!-- Soft golden glows for premium feel -->
                 <div class="absolute -top-10 -left-10 w-40 h-40 bg-[#FFD700] rounded-full mix-blend-screen filter blur-[60px] opacity-20 pointer-events-none"></div>
                 <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-[#FFD700] rounded-full mix-blend-screen filter blur-[60px] opacity-20 pointer-events-none"></div>
                 
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-white/50 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 z-20">
-                    <i class="fas fa-times text-xl"></i>
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-white/50 hover:text-white transition-colors w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 z-20">
+                    <i class="fas fa-times text-2xl"></i>
                 </button>
                 
-                <h2 class="font-brand font-extrabold text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#fff3b0] uppercase tracking-wider relative z-10 drop-shadow-sm">
+                <h2 class="font-brand font-extrabold text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#fff3b0] uppercase tracking-wider relative z-10 drop-shadow-sm leading-tight">
                      Chúc Mừng Năm Mới
                 </h2>
-                <p class="text-[#FFD700]/80 font-brand font-semibold mt-2 text-lg relative z-10 tracking-widest uppercase">Xuân Bính Ngọ 2026</p>
+                <p class="text-[#FFD700]/80 font-brand font-semibold mt-1 md:mt-2 text-sm md:text-lg relative z-10 tracking-widest uppercase">Xuân Bính Ngọ 2026</p>
             </div>
             
-            <!-- Body -->
-            <div class="p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center bg-white relative">
+            <!-- Body - Thêm overflow-y-auto để cuộn nội dung nếu dài -->
+            <div class="p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-center bg-white relative overflow-y-auto">
                 <!-- Book Cover (Clickable) -->
                 <a href="https://satfelis.izteach.vn/ebook-detail/68d0c86dca555c00020cd1e7" target="_blank" class="shrink-0 relative group block cursor-pointer" title="Xem sách Unlock SAT 1600">
                     <img src="https://d21acfi38wn3iy.cloudfront.net/resource/documents/9d2dd8b7-2de4-4dea-9c36-f8a2abc3dece/1770862031966-ban-sao-cua-tac-gia-tu-duy-sat-1600-2-png.png" 
-                         alt="Unlock SAT 1600" class="w-32 md:w-40 rounded-xl shadow-2xl object-cover transform -rotate-2 group-hover:rotate-0 transition-all duration-300 relative z-10 border border-slate-100 group-hover:scale-105">
+                         alt="Unlock SAT 1600" class="w-28 md:w-40 rounded-xl shadow-2xl object-cover transform -rotate-2 group-hover:rotate-0 transition-all duration-300 relative z-10 border border-slate-100 group-hover:scale-105">
                     <!-- Glow effect đằng sau ảnh -->
                     <div class="absolute inset-0 bg-[#004488] blur-2xl opacity-10 group-hover:opacity-30 transition-opacity"></div>
                 </a>
                 
                 <!-- Text Content -->
-                <div class="flex-1 text-center md:text-left flex flex-col h-full justify-center">
-                    <p class="text-slate-700 text-[16px] mb-6 leading-relaxed font-brand font-medium">
+                <div class="flex-1 text-center md:text-left flex flex-col h-full justify-center w-full">
+                    <p class="text-slate-700 text-[15px] md:text-[16px] mb-6 leading-relaxed font-brand font-medium">
                         Thầy <b class="text-[#004488] font-bold">Đức An</b> cùng đội ngũ chuyên gia <b class="bg-[#FFD700] text-[#004488] px-2 py-0.5 rounded shadow-sm inline-block transform -translate-y-0.5">1600 SAT</b> chân thành chúc quý phụ huynh và các em học sinh một năm mới Sức khỏe, Hạnh phúc và đạt được những cột mốc điểm số mong ước.
                     </p>
                     

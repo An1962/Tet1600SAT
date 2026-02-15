@@ -24,6 +24,7 @@
             background-color: var(--slate-50);
             color: #1e293b;
             scroll-behavior: smooth;
+            overflow-x: hidden; /* Ngăn cuộn ngang toàn trang */
         }
 
         .font-brand {
@@ -124,20 +125,44 @@
             padding-right: 8px;
         }
 
-        .fade-transition {
-            transition: opacity 0.25s ease-in-out, transform 0.25s ease-out;
+        /* --- NEW SLIDE ANIMATIONS --- */
+        .slide-transition {
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
         }
-        .fade-out {
+        
+        /* Trạng thái thoát ra bên trái */
+        .slide-out-left {
+            transform: translateX(-120%);
             opacity: 0;
-            transform: translateY(10px);
         }
-        .fade-in {
+        
+        /* Trạng thái thoát ra bên phải */
+        .slide-out-right {
+            transform: translateX(120%);
+            opacity: 0;
+        }
+        
+        /* Trạng thái bắt đầu từ bên trái (để chuẩn bị trượt vào) */
+        .slide-start-left {
+            transform: translateX(-120%);
+            opacity: 0;
+        }
+        
+        /* Trạng thái bắt đầu từ bên phải (để chuẩn bị trượt vào) */
+        .slide-start-right {
+            transform: translateX(120%);
+            opacity: 0;
+        }
+        
+        /* Trạng thái bình thường */
+        .slide-active {
+            transform: translateX(0);
             opacity: 1;
-            transform: translateY(0);
         }
         
         #vocab-container {
             touch-action: pan-y; /* Đảm bảo vẫn cuộn dọc được bình thường */
+            will-change: transform, opacity; /* Tối ưu hiệu năng render */
         }
     </style>
 </head>
@@ -482,7 +507,7 @@
             </div>
 
             <!-- Single Card Container with fade effect & swipe support -->
-            <div id="vocab-container" class="fade-transition fade-in min-h-[400px]">
+            <div id="vocab-container" class="fade-transition fade-in min-h-[400px] slide-transition slide-active">
                 <!-- Javascript will inject the single active card here -->
             </div>
 
@@ -868,19 +893,25 @@
         }
         
         function handleSwipeGesture() {
-            const swipeThresholdX = 50; // Quãng đường vuốt ngang tối thiểu
-            const swipeThresholdY = 60; // Ngưỡng dọc để tránh nhận diện nhầm khi người dùng cuộn trang lên/xuống
+            // CẤU HÌNH ĐỘ NHẠY
+            const swipeThresholdX = 80; // Tăng ngưỡng này lên (50 -> 80) để buộc người dùng phải vuốt dài hơn mới tính
+            const swipeThresholdY = 100; // Cho phép lệch dọc một chút khi vuốt chéo tay
             
-            // Nếu người dùng cuộn dọc quá nhiều, sẽ bỏ qua nhận diện vuốt ngang
-            if (Math.abs(touchendY - touchstartY) <= swipeThresholdY) {
-                if (touchendX < touchstartX - swipeThresholdX) {
-                    // Vuốt sang trái -> Sang thẻ tiếp theo
+            const xDiff = touchendX - touchstartX;
+            const yDiff = touchendY - touchstartY;
+            
+            // Logic chặt chẽ hơn:
+            // 1. Phải vuốt ngang nhiều hơn vuốt dọc (tránh nhầm khi đang scroll trang web)
+            // 2. Quãng đường vuốt ngang phải đủ dài (> 80px)
+            // 3. Quãng đường lệch dọc không quá lớn
+            if (Math.abs(xDiff) > Math.abs(yDiff) && Math.abs(xDiff) > swipeThresholdX && Math.abs(yDiff) < swipeThresholdY) {
+                if (xDiff < 0) {
+                    // Vuốt sang trái (ngón tay đi về bên trái) -> Next
                     if(currentIndex < vocabList.length - 1) {
                         changeDay(1);
                     }
-                }
-                if (touchendX > touchstartX + swipeThresholdX) {
-                    // Vuốt sang phải -> Quay lại thẻ trước
+                } else {
+                    // Vuốt sang phải (ngón tay đi về bên phải) -> Prev
                     if(currentIndex > 0) {
                         changeDay(-1);
                     }
